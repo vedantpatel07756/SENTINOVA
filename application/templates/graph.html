@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/navbar.css">
+<!-- chartjs  -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENTINOVA</title>
+  <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+  <div class="nav">
+    <div class="nleft">
+        <img id="userImage" src="../static/logo.png" alt="" id="logo" width="300">
+    </div>
+    <div class="nright">
+        <div class="link">
+            <ul>
+               <button onclick="dashboard()" style="padding: 2% ; font-size:10px;font-weight:600;margin-top:20px;background-color:none; border:none;">Back to Dashboard</button>
+            </ul>
+        </div>
+    </div>
+</div>
+ 
+</body>
+</html>
+
+
+<div class="mid">
+    <p id="avg_value" style="display: none;">{{avg}}</p>
+    <canvas id="doughnutChart" width="200" height="200"></canvas>
+    <span id="emoji">🙂</span>
+</div>
+
+<div class="container2">
+    <div class="chart-container">
+      <canvas id="sentimentPieChart" width="400" height="400"></canvas>
+    </div>
+    <div class="details-container">
+      <h1>Sentiment Analysis Results</h1>
+      <p>Here are the sentiment analysis results based on the data:</p>
+      <p id="value">{{pos}},{{neg}},{{neu}}</p>
+      <ul>
+        <li>Positive: {{pos}}%</li>
+        <li>Negative: {{neg}}%</li>
+        <li>Neutral: {{neu}}%</li>
+      </ul>
+      <p>These results provide insights into the distribution of sentiments within the analyzed data. Positive sentiments indicate satisfaction or agreement, negative sentiments suggest dissatisfaction or disagreement, while neutral sentiments imply a lack of strong emotional polarity.</p>
+      <p>It's worth noting that while positive sentiments may reflect successful outcomes or positive experiences, negative sentiments can highlight areas for improvement or dissatisfaction that may require attention.</p>
+      <p>Understanding the sentiment distribution can help in various contexts, such as gauging customer satisfaction, analyzing public opinion, or evaluating the effectiveness of communication strategies.</p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <div class="chart-container-rader">
+    <p  id="raderdata" style="display: none;">{{dataR}}</p>
+    <canvas class="rader" id="positiveChart" style="display: block; width:500px;height:auto"></canvas>
+    <canvas class="rader" id="negativeChart" ></canvas>
+    <canvas class="rader" id="neutralChart" ></canvas>
+  </div>
+
+    <!-- <canvas id="sentimentPieChart" width="400" height="400"></canvas> -->
+ 
+
+
+
+
+
+<div>
+  <p id="bar" style="display: none;">{{dataB}}</p>
+  <canvas id="mixedChart" width="400" height="200"></canvas>
+</div>
+
+
+
+
+
+<!-- <p id="value">{{pos}},{{neg}},{{neu}}</p> -->
+   
+<!-- <canvas id="sentimentHalfDonutChart" width="800" height="100"></canvas> -->
+
+<script src="../static/script.js"></script>
+
+<script>
+  function dashboard() {
+    window.location.href = "/dashboard"; // Redirect to the desired URL
+}
+</script>
+</body>
+</html>

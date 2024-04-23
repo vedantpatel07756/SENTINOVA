@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 2%;
+            margin: 5%;
+            border-radius: 20px;
+            border: 2px solid black;
+        }
+        
+        form {
+            margin: 0 auto;
+            width: 300px;
+          }
+          
+          label {
+            display: block;
+            margin-bottom: 5px;
+          }
+          
+          input[type="text"],
+          input[type="email"],
+          input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+          
+          input[type="checkbox"] {
+            margin-right: 5px;
+          }
+          
+          button[type="submit"], .register {
+            background-color: #4CAF50;
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+          }
+
+          .form-group input[type="submit"]{
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+          }
+          
+          button[type="submit"]:hover {
+            background-color: #45a049;
+          }
+          
+          
+          /* Additional styling for checkbox label */
+          label[for="agree"], label[for="member"] {
+            display: inline-block;
+            margin-bottom: 10px;
+          }
+
+          .avatar-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-upload img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+          
+          
+    </style>
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 3px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+    </style> -->
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="cleft">
+            
+            <form action="/login" method="post">
+                <h1>Login</h1>
+    
+                <label for="email">Your Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br>
+
+                <div class="form-group">
+                    <input type="submit" value="Login">
+                </div>
+                <br>
+                
+
+               
+                
+                
+              </form>
+              <button  style="background-color: blueviolet; width:40%; margin-left:30%; " onclick="rechange()" class="register">Register</button> 
+              <div class="error-message" style="color: red;">
+                {{error_message}}
+         
+            </div>
+        </div>
+
+        <div class="cright">
+                <img src="../static/bg.png" alt="">
+        </div>
+    </div>
+    <!-- <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login">
+            </div>
+
+            <div class="error-message">
+                {{error_message}}
+         
+            </div>
+        </form>
+    </div> -->
+
+    <script>
+        function rechange(){
+            window.location.href = "/register"; 
+        }
+    </script>
+</body>
+</html>

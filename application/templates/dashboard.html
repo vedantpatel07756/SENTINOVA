@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinova-Dashboard</title>
+    <link rel="stylesheet" href="../static/navbar.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+       
+    
+    
+    .buttons {
+       margin: 2%;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .btn {
+        background-color: white;
+        /* border: 1px solid #ccc; */
+        color: #333;
+        padding: 8px 16px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius:10px;
+        font-size: large;
+        font-weight: 600;
+    }
+    
+    .btn:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .btn.selected {
+        background-color: #8981D8;
+        color: white;
+        
+    }
+    
+    
+    .bright {
+        text-align: center; /* Center align the button */
+        /* margin-top: 20px; Add some top margin */
+    }
+    
+    .bright button {
+        background-color: none;
+        color: #8981D8; /* White text color */
+        padding: 10px 20px; /* Add padding */
+        border: 3px dashed #8981D8; /* Remove border */
+        border-radius: 5px; /* Add border radius */
+        cursor: pointer; /* Change cursor to pointer on hover */
+        font-size: 16px; /* Set font size */
+        font-weight: 600;
+    }
+    
+    .bright button:hover {
+        background-color: #8981D8; /* Darker green color on hover */
+        color: white;
+        border: 3px dashed white;
+    
+    }
+    
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Center align the items horizontally */
+        gap: 50px; /* Adjust the gap between the boxes */
+        margin: 2%;
+    }
+    
+    
+    .box {
+        background-color: white; /* Set background color to white */
+        border-radius: 20px; /* Apply border radius */
+        padding: 20px; /* Add padding for spacing inside the box */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        font-family: Arial, sans-serif; /* Set font family */
+        font-size: 15px; /* Set font size */
+        font-weight: bold; /* Set font weight to bold */
+        color: #777777; /* Set text color */
+        width: 250px; /* Set fixed width */
+        height: 180px; /* Set fixed height */
+    }
+    
+    .box p {
+        margin: 0; /* Remove default margin for paragraphs */
+    }
+    
+    
+    .circle {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle; /* Align circle vertically with text */
+    }
+    
+    .circle.red {
+        background-color: red;
+    }
+    
+    .circle.blue {
+        background-color: blue;
+    }
+    
+    .circle.yellow {
+        background-color: yellow;
+    }
+    
+    #delete{
+        border: none;
+        
+    }
+    #delete i{
+        font-size: large;
+        color: red;
+    }
+
+    .below{
+        display: flex;
+        justify-content: space-between;
+    }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <!-- <div class="nav">
+        <div class="nleft">
+            <img id="userImage" src="../static/logo.png" alt="" id="logo" width="300">
+        </div>
+        <div class="nright">
+            <div class="link">
+                <ul>
+                    <li id="name">Hello, {{user_name}}!</li>
+                    <li id="logoutBtn"><img src="{{user_image}}" alt="" id="img_profile"></li>
+                </ul>
+            </div>
+        </div>
+    </div> -->
+
+<div class="buttons">
+    <div class="bleft">
+    <button class="btn selected"> All</button>
+    <button  class="btn"> Project</button>
+    <button  class="btn">Business</button>
+    <button  class="btn">Personal</button>
+    </div>
+
+    <div class="bright">
+        <button onclick="redirectToDashboard()"> + Add New </button>
+    </div>
+    
+</div>
+
+<div class="container">
+{% for record in user_records %}
+<div class="box">
+    <p>Title:{{ record.title }} </p> <br>
+    <p>Type: <span>{{ record.type }}</span></p> <br>
+    <p>Filename:{{ record.filename }}</p> <br>
+    <p>Avg Sentiment Score: {{ record.avgno }}</p> <br>
+
+<div class="below">
+    <div class="circle">
+
+    </div>
+
+    <div class="delete">
+        <button class="del-btn" data-record-id="{{ record.id }}" id="delete"><i class="fa-solid fa-trash"></i></button>
+    </div>
+</div>
+</div>
+    
+{% endfor %}
+   
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add click event listener to all delete buttons
+        var delButtons = document.querySelectorAll('.del-btn');
+        delButtons.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var recordId = this.getAttribute('data-record-id');
+                // Send AJAX request to delete route
+                fetch('/delete/' + recordId, {
+                    method: 'DELETE'
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        // Remove the box from the frontend
+                        var box = btn.closest('.box');
+                        box.parentNode.removeChild(box);
+                    } else {
+                        // Handle error
+                        console.error('Error deleting record');
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error:', error);
+                });
+            });
+        });
+    });
+    
+
+
+    function redirectToDashboard() {
+        window.location.href = "/upload"; // Redirect to the desired URL
+    }
+    // Get all buttons
+    const buttons = document.querySelectorAll('.btn');
+
+    // Add click event listener to each button
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove 'selected' class from all buttons
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+    
+            // Add 'selected' class to the clicked button
+            this.classList.add('selected');
+    
+            // Get the filter value based on the selected button
+            const filter = this.textContent.trim();
+    
+            // Show/hide boxes based on the filter
+            if (filter === 'All') {
+                boxes.forEach(box => {
+                    box.style.display = 'block';
+                });
+            } else {
+                boxes.forEach(box => {
+                    const typeSpan = box.querySelector('span');
+                    const type = typeSpan.textContent.trim();
+                    if (type !== filter) {
+                        box.style.display = 'none';
+                    } else {
+                        box.style.display = 'block';
+                    }
+                });
+            }
+        });
+    });
+    
+    // Get all the boxes
+    const boxes = document.querySelectorAll('.box');
+    
+    // Loop through each box
+    boxes.forEach(box => {
+        // Get the type span within the box
+        const typeSpan = box.querySelector('span');
+    
+        // Get the circle element within the box
+        const circle = box.querySelector('.circle');
+    
+        // Get the text content of the type span
+        const type = typeSpan.textContent.trim();
+    
+        // Set the appropriate class to the circle based on the type
+        if (type === 'Business') {
+            circle.classList.add('red');
+        } else if (type === 'Personal') {
+            circle.classList.add('blue');
+        } else if (type === 'Project') {
+            circle.classList.add('yellow');
+        }
+    });
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+        .container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 2%;
+            margin: 5%;
+            border-radius: 20px;
+            border: 2px solid black;
+        }
+        
+        form {
+            margin: 0 auto;
+            width: 300px;
+          }
+          
+          label {
+            display: block;
+            margin-bottom: 5px;
+          }
+          
+          input[type="text"],
+          input[type="email"],
+          input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+          
+          input[type="checkbox"] {
+            margin-right: 5px;
+          }
+          
+          button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          button[type="submit"]:hover {
+            background-color: #45a049;
+          }
+          
+          /* Additional styling for checkbox label */
+          label[for="agree"], label[for="member"] {
+            display: inline-block;
+            margin-bottom: 10px;
+          }
+
+          .avatar-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-upload img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+          
+          
+    </style>
+    <!-- <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .avatar-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-upload img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style> -->
+</head>
+<body>
+
+    <div class="container">
+        <div class="cleft">
+            
+            <form action="/register" method="post" enctype="multipart/form-data">
+                <h1>Register</h1>
+                <label for="name">Your Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Your Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password"><br>
+
+                <div class="avatar-upload">
+                    <label for="avatar" style="text-align: left;">Profile Picture:</label><br>
+                    <input type="file" id="avatar" name="avatar" accept="image/*"> <br>
+                    <img id="preview" src="#" alt="Your Avatar" style="display: none;">
+                </div> <br>
+                
+                <label for="name">Bio:</label><br>
+                <input type="text" id="bio" name="bio"><br>
+
+                <button type="submit">Register</button> 
+               
+                
+              </form>
+
+              <button type="submit" style="background-color: blueviolet; display:none" onclick="change()">Login</button> <br>
+        </div>
+
+        <div class="cright">
+                <img src="../static/bg.png" alt="">
+        </div>
+    </div>
+<!-- <div class="container">
+    <h2>User Registration</h2>
+    <form action="/register" method="post" enctype="multipart/form-data">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <div class="avatar-upload">
+            <label for="avatar">Profile Picture:</label><br>
+            <input type="file" id="avatar" name="avatar" accept="image/*">
+            <img id="preview" src="#" alt="Your Avatar" style="display: none;">
+        </div>
+
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio" rows="4"></textarea>
+
+        <input type="submit" value="Register">
+    </form>-->
+<!-- </div>  -->
+
+<script>
+    function change(){
+        window.location.href = "/login"; 
+    }
+    const avatarInput = document.getElementById('avatar');
+    const preview = document.getElementById('preview');
+
+    avatarInput.addEventListener('change', function() {
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function() {
+                preview.style.display = 'block';
+                preview.src = reader.result;
+            });
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+
+</body>
+</html>
