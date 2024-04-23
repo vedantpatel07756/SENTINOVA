@@ -171,6 +171,8 @@ def login():
         error_message = 'Invalid email or password'
         return render_template('login.html', error_message=error_message)
     
+    # Add a default return statement if the function ends without returning
+    return render_template('login.html')  # or another appropriate response
 
     
 @app.route('/dashboard')
